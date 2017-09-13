@@ -1,0 +1,11 @@
+extends:
+  - metalab
+  - metalab/react
+env:
+  browser: true
+rules:
+  metalab/jsx-a11y/no-noninteractive-element-interactions: 0
+  metalab/jsx-a11y/media-has-caption: 0
+  metalab/jsx-a11y/label-has-for: 0
+  metalab/react/prefer-stateless-function: 0
+  metalab/jsx-a11y/no-onchange: 0
