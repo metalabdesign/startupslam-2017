@@ -143,7 +143,9 @@ class Shop extends React.Component {
       // You have access to `this.state` which is documented at the top of the
       // class and has information about things like the current user and the
       // current cart.
-      // TODO: Add data common to all events here!
+      ...this.state.user,
+      ...this.state.env,
+      cartId: this.state.cartId,
     });
   }
 
@@ -192,9 +194,14 @@ class Shop extends React.Component {
       // the properties of the item being added to cart. Additionally you have
       // access to all of `this.state` which is documented at the top of the
       // class.
-      // TODO: Add data here associated with the `addToCart` event.
-      // this.sendEvent('addToCart', {});
-      alert('Add `addToCart` analytics event here!');
+      this.sendEvent('addToCart', {
+        attack: product.attack,
+        defense: product.defense,
+        type: product.type,
+        price: product.price,
+        cost: product.quantity * product.price,
+        id: product.id,
+      });
     }
   }
 
@@ -212,9 +219,10 @@ class Shop extends React.Component {
     // This function is responsible for sending an analytics event whenever
     // someone clicks the `checkout` button. You can control what data you
     // send out along with this event.
-    // TODO: Add data here associated with the `checkout` event.
-    // this.sendEvent('checkout', {});
-    alert('Add `checkout` analytics event here!');
+    this.sendEvent('checkout', {
+      items: this.state.cart.map(({id}) => id),
+      total: getTotal(this.state.cart),
+    });
 
     // Clear the cart. A real app would do more here.
     this.clearCart();
